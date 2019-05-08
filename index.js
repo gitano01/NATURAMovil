@@ -13,6 +13,7 @@ import InicioAPP from './src/components/InicioAPP';
 import Products from './src/components/Products';
 import Menu from './src/components/Menu';
 import DetailProduct from './src/components/DetailProduct';
+import TipoPago from './src/components/TipoPago';
 
 
 import {name as appName} from './app.json';

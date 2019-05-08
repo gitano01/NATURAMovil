@@ -20,13 +20,13 @@ import Cart from '../components/Cart';
 import InicioApp from '../components/InicioAPP';
 import inBuild from '../pages/inBuild';
 import SearchProduct from '../components/SearchProduct';
-import TipoPago from '../components/TipoPago';
 import OcultarEjemplo from "../components/OcultarEjemplo";
+import TipoPago from "../components/TipoPago";
 
 const AppStack = createStackNavigator({
 
 
-  TipoPago: {screen: TipoPago},
+  TipoPago:{screen: TipoPago},
   OcultarEjemplo: {screen: OcultarEjemplo},
   Lugares: { screen: Lugares },
   Categorias: { screen: Categorias },

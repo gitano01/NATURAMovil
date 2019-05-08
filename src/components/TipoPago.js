@@ -66,6 +66,8 @@ class TipoPago extends React.Component {
                     <PagoTarjeta/>
                 </View>
 
+
+
             </View>
 
 
