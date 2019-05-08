@@ -73,7 +73,7 @@ class PagoTarjeta extends React.Component {
                     <TextInput style={styles.Inputs} placeholder={'Año'}/>
                     <View style={{alignItems:'center', marginTop:10, marginBottom: 10}}>
                         <TouchableOpacity style={{justifyContent:'center',alignContent: 'center', alignItems:'center', width:'50%', backgroundColor:'#4BAA2B', height: 36}} onPress={()=> Alert.alert('Hola desgraciado')}>
-                            <Text style={{color: '#FFF'}}> Hola Desgraciado</Text>
+                            <Text style={{color: '#FFF'}}> Pagar</Text>
                         </TouchableOpacity>
                     </View>
 
