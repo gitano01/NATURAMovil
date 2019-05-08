@@ -1,26 +1,46 @@
-import React from 'react';
+import React,{Component} from 'react';
 
 import {View, Text, TouchableOpacity, StyleSheet, Platform, Alert} from "react-native";
 
-import {withNavigation} from 'react-navigation';
+
 import Icon from "react-native-vector-icons/Ionicons";
 import PopMenu from '../components/PopupMenu';
 import PagoTarjeta from '../components/PagoTarjeta';
 
+import {withNavigation} from 'react-navigation';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
-class TipoPago extends React.Component {
+
+
+var radio_props = [
+    {label: 'Déposito/Caja', value:0},
+    {label: 'Tarjeta Credito/Débito', value:1},
+    {label: 'Todo incluido', value:2}
+];
+
+
+class TipoPago extends Component {
     static navigationOptions = {
         header: null
     };
     constructor(props){
         super(props);
-        this.state={
+        this.state = {
+            show: true,
+            show1: true,
+            show2: false,
+            show3: false,
+        };
+         }
 
+
+   /* ShowHideComponent = () => {
+        if (this.state.show == true) {
+            this.setState({ show: false });
+        } else {
+            this.setState({ show: true });
         }
-
-    }
-
-
+    };*/
 
     render() {
         const {navigation} = this.props;
@@ -29,7 +49,7 @@ class TipoPago extends React.Component {
         return (
 
             <View>
-                <View style={styles.headerSite}>
+                 <View style={styles.headerSite}>
                     <TouchableOpacity style={styles.roll} onPress={() =>navigation.navigate('Lugares')}>
                         <Text>
                             <Icon
@@ -62,8 +82,28 @@ class TipoPago extends React.Component {
                     </View>
                 </View>
 
+                <View style={{flexDirection:'row', justifyContent:'center', marginTop:20}}>
+                    <RadioForm
+                        formHorizontal={true}
+                        buttonHorizontal={true}
+                        labelHorizontal={true}
+                        buttonSize={7}
+                        buttonOuterSize={17}
+                        buttonWrapStyle={{borderWidth:1}}
+                        buttonColor={'#000'}
+                        buttonOuterColor={'#4baa2b'}
+                        buttonSelectedColor={'#4baa2b'}
+                        labelStyle={{fontSize: 10, color: '#000', fontFamily: 'Roboto', paddingLeft: 5, paddingRight:10}}
+                        radio_props={radio_props}
+                        initial={0}
+                        onPress={(value) => {this.setState({value:value})}}
+                    />
+                </View>
+
                 <View>
+                    {this.state.show ? (
                     <PagoTarjeta/>
+                    ) : null}
                 </View>
 
 
@@ -127,6 +167,13 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
 
     },
+    Buttons:{
+
+        backgroundColor: '#4baa2b',
+        paddingLeft: 1,
+        paddingRight:1
+
+    }
 });
 
 

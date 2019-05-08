@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
         margin: 10,
     },
 });
-export  default withNavigation(TipoPago);
+export  default withNavigation(OcultarEjemplo);

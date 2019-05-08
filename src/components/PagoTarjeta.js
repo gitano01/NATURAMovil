@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import {View, Text, TouchableOpacity, StyleSheet,Alert,TextInput} from "react-native";
 
@@ -6,7 +6,7 @@ import {withNavigation} from 'react-navigation';
 
 
 
-class PagoTarjeta extends React.Component {
+class PagoTarjeta extends Component <Props>{
     static navigationOptions = {
         header: null
     };
@@ -21,8 +21,7 @@ class PagoTarjeta extends React.Component {
 
 
     render() {
-        const {navigation} = this.props;
-        const lugar = navigation.getParam("lugar", "NO-NAME");
+
 
         return (
 
@@ -30,7 +29,7 @@ class PagoTarjeta extends React.Component {
 
 
             <View style={{justifyContent:'center', alignItems:'center'}}>
-                <View style={{marginTop: 50,width:'100%', paddingRight:10, paddingLeft:10, borderColor:'#c0c0c0', borderWidth:1}}>
+                <View style={{marginTop: 10,width:'100%', paddingRight:10, paddingLeft:10, borderColor:'#c0c0c0', borderWidth:1}}>
                     <View style={{alignItems:'center', marginTop:10}}>
                     <Text>Datos de la tarjeta</Text>
                     </View>

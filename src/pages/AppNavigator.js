@@ -26,7 +26,7 @@ import TipoPago from "../components/TipoPago";
 const AppStack = createStackNavigator({
 
 
-  TipoPago:{screen: TipoPago},
+  TipoPago: {screen: TipoPago},
   OcultarEjemplo: {screen: OcultarEjemplo},
   Lugares: { screen: Lugares },
   Categorias: { screen: Categorias },
