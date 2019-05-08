@@ -21,14 +21,13 @@ import InicioApp from '../components/InicioAPP';
 import inBuild from '../pages/inBuild';
 import SearchProduct from '../components/SearchProduct';
 import TipoPago from '../components/TipoPago';
-import PagoTarjeta from '../components/PagoTarjeta';
 import OcultarEjemplo from "../components/OcultarEjemplo";
 
 const AppStack = createStackNavigator({
 
-  OcultarEjemplo: {screen: OcultarEjemplo},
+
   TipoPago: {screen: TipoPago},
-  PagoTarjeta: {screen: PagoTarjeta},
+  OcultarEjemplo: {screen: OcultarEjemplo},
   Lugares: { screen: Lugares },
   Categorias: { screen: Categorias },
   Privacity2: { screen: Privacity2 },

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {View, Text, TouchableOpacity, StyleSheet, Platform, Alert,TextInput} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet,Alert,TextInput} from "react-native";
 
 import {withNavigation} from 'react-navigation';
-import Icon from "react-native-vector-icons/Ionicons";
-import PopMenu from '../components/PopupMenu';
+
 
 
 class PagoTarjeta extends React.Component {
@@ -27,39 +26,8 @@ class PagoTarjeta extends React.Component {
 
         return (
 
-            <View>
-                <View style={styles.headerSite}>
-                    <TouchableOpacity style={styles.roll} onPress={() =>navigation.navigate('Lugares')}>
-                        <Text>
-                            <Icon
-                                name={Platform.OS === "ios" ? "ios-pin" : "md-pin"}
-                                color="#FFF"
-                                size={26}
-                            />
-                        </Text>
-                        <Text style={styles.text}>
-                            Usted está aqui:{" "+ lugar}
-                        </Text>
-                        <Text style={styles.arrow}>
-                            <Icon
-                                name={Platform.OS === "ios" ? "ios-arrow-down" : "md-arrow-dropdown"}
-                                color="#FFF"
-                                size={24}
-                            />
-                        </Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.search} onPress={()=> Alert.alert('¿Qué hay viejo?')} disable={true}>
-                        <Icon
-                            name={Platform.OS === "ios" ? "ios-search" : "md-search"}
-                            color="#FFF"
-                            size={24}
-                        />
-                    </TouchableOpacity>
 
-                    <View style={{ position: "relative"}}>
-                        <PopMenu/>
-                    </View>
-                </View>
+
 
             <View style={{justifyContent:'center', alignItems:'center'}}>
                 <View style={{marginTop: 50,width:'100%', paddingRight:10, paddingLeft:10, borderColor:'#c0c0c0', borderWidth:1}}>
@@ -78,7 +46,7 @@ class PagoTarjeta extends React.Component {
                     </View>
 
                 </View>
-            </View>
+
 
 
             </View>
