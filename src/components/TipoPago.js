@@ -1,11 +1,15 @@
 import React,{Component} from 'react';
 
-import {View, Text, TouchableOpacity, StyleSheet, Platform, Alert} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet, Platform, Alert, KeyboardAvoidingView} from "react-native";
 
 
 import Icon from "react-native-vector-icons/Ionicons";
 import PopMenu from '../components/PopupMenu';
+import All_Included from '../components/All_Included';
+import MoneyBox from '../components/MoneyBox';
 import PagoTarjeta from '../components/PagoTarjeta';
+import MenuBar  from '../components/Menu';
+
 
 import {withNavigation} from 'react-navigation';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
@@ -13,8 +17,8 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 
 
 var radio_props = [
-    {label: 'Déposito/Caja', value:0},
-    {label: 'Tarjeta Credito/Débito', value:1},
+    {label: 'Tarjeta', value:0},
+    {label: 'Déposito', value:1},
     {label: 'Todo incluido', value:2}
 ];
 
@@ -26,21 +30,10 @@ class TipoPago extends Component {
     constructor(props){
         super(props);
         this.state = {
-            show: true,
-            show1: true,
-            show2: false,
-            show3: false,
+        valor: 0
         };
          }
 
-
-   /* ShowHideComponent = () => {
-        if (this.state.show == true) {
-            this.setState({ show: false });
-        } else {
-            this.setState({ show: true });
-        }
-    };*/
 
     render() {
         const {navigation} = this.props;
@@ -48,7 +41,7 @@ class TipoPago extends Component {
 
         return (
 
-            <View>
+            <View style={{ flex:1, flexDirection:'column'}}>
                  <View style={styles.headerSite}>
                     <TouchableOpacity style={styles.roll} onPress={() =>navigation.navigate('Lugares')}>
                         <Text>
@@ -82,29 +75,42 @@ class TipoPago extends Component {
                     </View>
                 </View>
 
-                <View style={{flexDirection:'row', justifyContent:'center', marginTop:20}}>
+                <View style={{flexDirection:'row', justifyContent:'center', marginTop:15, height: 20}}>
+
                     <RadioForm
                         formHorizontal={true}
                         buttonHorizontal={true}
                         labelHorizontal={true}
                         buttonSize={7}
                         buttonOuterSize={17}
-                        buttonWrapStyle={{borderWidth:1}}
+                        buttonStyle={{borderWidth:0.5}}
+                        selectedButtonColor={'#4baa2b'}
+                        selectedButtonOuterColor={'#000'}
                         buttonColor={'#000'}
-                        buttonOuterColor={'#4baa2b'}
-                        buttonSelectedColor={'#4baa2b'}
-                        labelStyle={{fontSize: 10, color: '#000', fontFamily: 'Roboto', paddingLeft: 5, paddingRight:10}}
+                        labelStyle={{fontSize: 11, color: '#000', fontFamily: 'Roboto', paddingLeft: 5, paddingRight:10}}
                         radio_props={radio_props}
-                        initial={0}
+                        initial={this.state.valor}
                         onPress={(value) => {this.setState({value:value})}}
+                        style={{}}
                     />
                 </View>
 
-                <View>
-                    {this.state.show ? (
-                    <PagoTarjeta/>
-                    ) : null}
+                <View style={{flex:1}}>
+
+                    {       <KeyboardAvoidingView style={{zIndex:2}} enabled={true}  behavior="padding" >
+                        (this.state.value === 1) ? (<MoneyBox/>): (this.state.value === 2) ? (<All_Included/>) :(<PagoTarjeta/>)
+                            </KeyboardAvoidingView>
+                    }
+
                 </View>
+
+                <View style={{position:'relative',justifyContent:'flex-end'}}>
+
+                    <MenuBar/>
+
+                </View>
+
+
 
 
 

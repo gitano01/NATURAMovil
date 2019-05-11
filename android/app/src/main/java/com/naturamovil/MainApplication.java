@@ -2,6 +2,7 @@ package com.naturamovil;
 
 import android.app.Application;
 import com.facebook.react.ReactApplication;
+import com.dieam.reactnativeconekta.ReactNativeConektaPackage;
 import com.microsoft.codepush.react.CodePush;
 import com.wix.RNCameraKit.RNCameraKitPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeConektaPackage(),
             new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG),
             new RNCameraKitPackage(),
             new RNGestureHandlerPackage(),

@@ -10,7 +10,7 @@ import {
   BackHandler,
   AsyncStorage
 } from "react-native";
-import { withNavigation } from "react-navigation";
+import { withNavigation} from "react-navigation";
 import Menu, {
   MenuItem,
   MenuDivider,
@@ -18,10 +18,7 @@ import Menu, {
 } from "react-native-enhanced-popup-menu";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const _Logout = async () => {
-  await AsyncStorage.setItem("session", "false");
-  BackHandler.exitApp();
-};
+
 
 const Popup_Menu = ({ navigation }) => {
   let textRef = React.createRef();
@@ -48,6 +45,17 @@ const Popup_Menu = ({ navigation }) => {
     );
     menuRef.hide();
   };
+
+  const _Logout = async () => {
+
+
+    await AsyncStorage.setItem("session", "false");
+
+    navigation.navigate('Login');
+
+  };
+
+
 
   const showMenu = () =>
     menuRef.show(textRef.current, (stickTo = Position.TOP_LEFT));
