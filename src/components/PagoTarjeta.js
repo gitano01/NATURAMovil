@@ -4,6 +4,8 @@ import {View, Text, TouchableOpacity, StyleSheet,Alert,TextInput, ScrollView} fr
 
 import {withNavigation} from 'react-navigation';
 import NumericInput from 'react-native-numeric-input';
+import Conekta from 'react-native-conekta';
+
 
 
 class PagoTarjeta extends Component <Props>{
@@ -13,11 +15,86 @@ class PagoTarjeta extends Component <Props>{
     constructor(props){
         super(props);
         this.state={
-            value1:1,
-            value2:2019
+            name: '',
+            number: '',
+            exp_year:2019,
+            exp_month: 1,
+            cvc: ''
+
         }
 
     }
+
+    InputsCheck = () => {
+
+        //var pattern = /^[A-Z]+$/;
+
+        const {name} = this.state;
+        var nombre = name.toString().toUpperCase();
+        const {number} = this.state;
+        const {exp_month} = this.state;
+        const {exp_year} = this.state;
+        const {cvc} = this.state;
+
+
+
+
+
+
+        /*var data = {
+
+            "card":{
+
+                "number": number,
+                "name": nombre,
+                "expYear": exp_year,
+                "expMonth": exp_month,
+                "cvc": cvc
+
+            }
+
+        }*/
+
+        /*console.warn(
+        "nombre = " + JSON.stringify(data.card.name) +"\n"+
+                "numero = " + JSON.stringify(data.card.number) + "\n" +
+                "exp_mes = " + JSON.stringify(data.card.expMonth) + "\n" +
+                "exp_año = " + JSON.stringify(data.card.expYear) + "\n" +
+                "cvc = " + JSON.stringify(data.card.cvc)
+        );*/
+
+
+        var conektaApi = new Conekta();
+
+        conektaApi.setPublicKey("key_BRqaen3dZfM2qXPzrMzcQPQ");
+        conektaApi.api_version = "2.0.3";
+
+        conektaApi.createToken({
+
+
+            cardNumber: number.toString(),
+            name: nombre.toString(),
+            cvc: cvc.toString(),
+            expMonth: exp_month.toString(),
+            expYear: exp_year.toString()
+            }, function (data) {
+
+            console.warn("El token::>", data.id);
+            //Alert.alert("Datos::::> ", String.valueOf(data.id).toString());
+
+        }, function () {
+           // Alert.alert("Error chavo");
+            console.warn('Error chavo');
+
+        });
+
+
+
+
+
+
+    }
+
 
 
 
@@ -36,26 +113,68 @@ class PagoTarjeta extends Component <Props>{
                     <Text>Datos de la tarjeta</Text>
                     </View>
 
-                    <View style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}><Text style={{width:'20%'}}> Nombre</Text><TextInput style={styles.Inputs} placeholder={'Nombre del titular de la tarjeta'} maxLength={50} /></View>
-                    <View style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}><Text style={{width:'20%'}}> No. de Tarjeta</Text><TextInput style={styles.Inputs} placeholder={'Número de tarjeta'} maxLength={16}/></View>
+                    <View style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}><Text style={{width:'20%'}}> Nombre</Text>
+                        <TextInput
+                            style={styles.Inputs}
+                            placeholder={'Nombre del titular de la tarjeta'}
+                            maxLength={50}
+                            keyboardtype={"default"}
+                            onChangeText = { name => this.setState({name})}
+                        />
+                    </View>
+                    <View style={{flexDirection:'row', justifyContent:'flex-end', alignItems:'center'}}><Text style={{width:'20%'}}> No. de Tarjeta</Text>
+                        <TextInput
+                            style={styles.Inputs}
+                            placeholder={'Número de tarjeta'}
+                            maxLength={16}
+                            keyboardType={"numeric"}
+                            onChangeText = {number => this.setState({number})}
+                        />
+                    </View>
 
                     <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center', paddingLeft:15, marginTop:10}}>
-                        <Text style={{width:'20%'}}> Fecha de Expirado</Text>
+                        <Text style={{width:'20%'}}> Fecha de Expirado (MES/AÑO)</Text>
                         <View style={{flexDirection:'row',paddingLeft:12}}>
 
-                            <NumericInput totalWidth={70} totalHeight={40} type='up-down'  editable={false} minValue={1} maxValue={12} initValue={this.state.value1}
-                                           onChange={value1 => this.setState({value1})}  /><Text style={{width:15}}></Text>
+                            <NumericInput
+                                totalWidth={70}
+                                totalHeight={40}
+                                type='up-down'
+                                editable={false}
+                                minValue={1}
+                                maxValue={12}
+                                initValue={this.state.exp_month}
+                                onChange={exp_month => this.setState({exp_month})}
+                            />
 
-                            <NumericInput type='up-down'  editable={false} minValue={2019} maxValue={2031} initValue={this.state.value2}
-                                          onChange={value2 => this.setState({value2})}/>
+                            <Text style={{width:15}}></Text>
+
+                            <NumericInput
+                                type='up-down'
+                                editable={false}
+                                minValue={2019}
+                                maxValue={2031}
+                                initValue={this.state.exp_year}
+                                onChange={exp_year => this.setState({exp_year})}
+                            />
+
                         </View>
                     </View>
-                    <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center', marginLeft:10}}><Text  style={{width:'20%'}} > CVV/CVC</Text><TextInput style={styles.InputSmall} placeholder={'CVC'} maxLength={3}/></View>
+                    <View style={{flexDirection:'row', justifyContent:'flex-start', alignItems:'center', marginLeft:10}}>
+                        <Text  style={{width:'20%'}} > CVV/CVC</Text>
+                        <TextInput
+                            style={styles.InputSmall}
+                            placeholder={'CVC'}
+                            maxLength={4}
+                            keyboardType={"numeric"}
+                            onChangeText={cvc => this.setState({cvc})}
+                        />
+                    </View>
 
 
 
                     <View style={{alignItems:'center', marginTop:10, marginBottom: 15}}>
-                        <TouchableOpacity style={{justifyContent:'center',alignContent: 'center', alignItems:'center', width:'50%', backgroundColor:'#4BAA2B', height: 36}} onPress={()=> Alert.alert('Hola desgraciado')}>
+                        <TouchableOpacity style={{justifyContent:'center',alignContent: 'center', alignItems:'center', width:'50%', backgroundColor:'#4BAA2B', height: 36}} onPress={()=> this.InputsCheck()}>
                             <Text style={{color: '#FFF'}}> Pagar</Text>
                         </TouchableOpacity>
                     </View>
@@ -134,6 +253,7 @@ const styles = StyleSheet.create({
         width:'70%',
         height: 40,
         fontSize:12,
+        textTransform: 'uppercase',
         fontFamily:'Roboto',
         borderColor: '#c0c0c0'
 

@@ -97,9 +97,9 @@ class TipoPago extends Component {
 
                 <View style={{flex:1}}>
 
-                    {       <KeyboardAvoidingView style={{zIndex:2}} enabled={true}  behavior="padding" >
+                    {
                         (this.state.value === 1) ? (<MoneyBox/>): (this.state.value === 2) ? (<All_Included/>) :(<PagoTarjeta/>)
-                            </KeyboardAvoidingView>
+
                     }
 
                 </View>
