@@ -19,7 +19,9 @@ class Form extends React.Component {
   }
 
   _saveSessionAsync = async () => {
+    const {user} = this.state;
     await AsyncStorage.setItem("session", "true");
+    await  AsyncStorage.setItem("User",user.toString());
   };
 
   InputCheck = () => {
@@ -59,6 +61,7 @@ class Form extends React.Component {
             active = JSON.stringify(response.usuario.activo);
 
             if (active == "true") {
+
               this.props.navigation.navigate(
                 privacy == "true" ? "Lugares" : "Privacity"
               );

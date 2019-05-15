@@ -38,24 +38,10 @@ class Login extends React.Component{
 
   handleBackButtonClick() {
     this._handleOnPress();
-    return true;
-  }
+      }
   _handleOnPress = () => {
 
-    Alert.alert(
-        'Finalizar aplicación',
-        'Se finalizará NATURAMovil',
-        [
-
-          {
-            text: 'Cancelar',
-            style: 'cancel',
-          },
-          {text: 'Aceptar', onPress: () => BackHandler.exitApp()},
-        ],
-        {cancelable: false},
-    );
-
+    BackHandler.exitApp();
 
   }
 

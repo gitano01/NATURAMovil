@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 
-import {View, Text, TouchableOpacity, StyleSheet,Alert,TextInput, ScrollView} from "react-native";
+import {View, Text, TouchableOpacity, StyleSheet,Alert,TextInput, ScrollView, AsyncStorage} from "react-native";
 
 import {withNavigation} from 'react-navigation';
 import NumericInput from 'react-native-numeric-input';
 import Conekta from 'react-native-conekta';
+import Payment from '../functions/Payment';
+
 
 
 
@@ -41,29 +43,6 @@ class PagoTarjeta extends Component <Props>{
 
 
 
-        /*var data = {
-
-            "card":{
-
-                "number": number,
-                "name": nombre,
-                "expYear": exp_year,
-                "expMonth": exp_month,
-                "cvc": cvc
-
-            }
-
-        }*/
-
-        /*console.warn(
-        "nombre = " + JSON.stringify(data.card.name) +"\n"+
-                "numero = " + JSON.stringify(data.card.number) + "\n" +
-                "exp_mes = " + JSON.stringify(data.card.expMonth) + "\n" +
-                "exp_año = " + JSON.stringify(data.card.expYear) + "\n" +
-                "cvc = " + JSON.stringify(data.card.cvc)
-        );*/
-
-
         var conektaApi = new Conekta();
 
         conektaApi.setPublicKey("key_BRqaen3dZfM2qXPzrMzcQPQ");
@@ -79,8 +58,14 @@ class PagoTarjeta extends Component <Props>{
             expYear: exp_year.toString()
             }, function (data) {
 
-            console.warn("El token::>", data.id);
-            //Alert.alert("Datos::::> ", String.valueOf(data.id).toString());
+            console.warn("TODO::>", data.id );
+            AsyncStorage.setItem("token", data.id);
+
+            var Pago = new Payment();
+
+            Pago.Pago();
+
+
 
         }, function () {
            // Alert.alert("Error chavo");
@@ -93,7 +78,12 @@ class PagoTarjeta extends Component <Props>{
 
 
 
-    }
+
+
+
+
+    };
+
 
 
 

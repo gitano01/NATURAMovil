@@ -50,10 +50,19 @@ const Popup_Menu = ({ navigation }) => {
 
 
     await AsyncStorage.setItem("session", "false");
+    await AsyncStorage.setItem("User","");
 
     navigation.navigate('Login');
 
   };
+
+  const _getUser = async () => {
+
+    var user = await AsyncStorage.getItem("User");
+
+    Alert.alert("Información del usuario " ,  user.toString());
+    menuRef.hide();
+  }
 
 
 
@@ -75,7 +84,8 @@ const Popup_Menu = ({ navigation }) => {
       </TouchableOpacity>
 
       <Menu ref={setMenuRef}>
-        <MenuItem onPress={Privacity}>Aviso de Privacidad</MenuItem>
+        <MenuItem onPress={_getUser}>Info. Usuario</MenuItem>
+        <MenuItem onPress={Privacity}>Aviso de Priv.</MenuItem>
         <MenuItem onPress={Cerrar}>Cerrar sesión</MenuItem>
       </Menu>
     </View>
