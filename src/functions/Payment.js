@@ -22,19 +22,22 @@ class Payment{
        conekta.api_version = '2.0.3';
 
        var order =({
-            line_items: [{
-                name: "Tacos",
-                unit_price: 1000,
-                quantity: 120
+            orders: [{
+                id: 1,
+                cantidad: 3,
+                opcion1: null,
+                opcion2: null,
+                opcion3: null
             }],
-            shipping_lines: [{
-                amount: 1500,
-                carrier: "FEDEX"
-            }], //shipping_lines - physical goods only
+            usuario: 2,
+            calificacion: 0,
+            calificado: false,
+            tipo_pago: "tarjeta",
+            lugar_id: 1,
             currency: "MXN",
             customer_info: {
-                name: 'Fulanito Pérez',
-                phone: '+52181818181'
+                name: 'ENERICO',
+
             },
               //shipping_contact - required only for physical goods
             metadata: {description: "Compra de creditos: 300(MXN)", reference: "1334523452345"},
@@ -57,7 +60,22 @@ class Payment{
 
         });
 
-        Alert.alert("contenido del Json: ",token.toString()+"\n"+JSON.stringify(order));
+         await fetch("http://192.168.13.128:3005/api/v1/pedidos/conekta_create",       {
+                 method: 'POST',
+             headers: {
+                     'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                 },
+             body: JSON.stringify(order)
+             }
+         )
+             .then((response )=> response.json())
+             .then((responseData) => {
+                 Alert.alert("Post response")
+             })
+             .done();
+
+         Alert.alert("contenido del Json: ",token.toString()+"\n"+JSON.stringify(order));
 
 
 
